@@ -1,35 +1,44 @@
 package com.hendricks.assessment.controllers;
 
-import java.util.ArrayList;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hendricks.assessment.repos.CustomerEntity;
+import com.hendricks.assessment.repos.CustomerRepository;
 
 @RestController
 public class CustomerController {
 	
-	@GetMapping("/greeting")
-	public ArrayList<CustomerEntity> getCustomers() {
-		return null;
+	@Autowired
+	private CustomerRepository customerRepository;
+	
+	@GetMapping("/customers")
+	public @ResponseBody Iterable<CustomerEntity> getCustomers() {
+		return customerRepository.findAll();
 	}
+	
 	@GetMapping("/create")
-	public boolean createCustomer() {
-		boolean result = false;
-//		if(customercreate) {
-//			
-//		}
-		return result;
+	public @ResponseBody String createCustomer(@RequestParam String firstName, @RequestParam String lastName, 
+			@RequestParam  String address) {
+		CustomerEntity c = new CustomerEntity();
+		c.setFirstName(firstName);
+		c.setLastName(lastName);
+		c.setAddress(address);
+		customerRepository.save(c);
+		return "Customer Added";
+		
 	}
 	
 	@GetMapping("/delete")
-	public boolean deleteCustomer() {
-		boolean result = false;
-//		if(customer) {
-//			
-//		}
-		return result;
+	public @ResponseBody String deleteCustomer(@RequestParam int id) {
+		Optional<CustomerEntity> c = customerRepository.findById(id);
+		customerRepository.deleteById(c.get().getId());
+		return "Customer Deleted";
 	}
 	
 	

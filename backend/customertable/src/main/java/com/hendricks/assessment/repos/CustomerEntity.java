@@ -12,7 +12,7 @@ public class CustomerEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-    private String id;
+    private int id;
 
     private String firstName;
 
@@ -20,11 +20,11 @@ public class CustomerEntity {
 
     private String address;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
