@@ -62,15 +62,12 @@ export class CustomerComponent extends Component {
     }
 
     render() {
-
         const { openCreate, openDelete, items, deletedId } = this.state
         return (
             <div>
                 <Paper>
                     <Button
-
                         variant="contained" color='primary' onClick={this.addNewCustomer}>Add New Customer</Button>
-
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -86,7 +83,7 @@ export class CustomerComponent extends Component {
                                     <TableCell >
                                         {row.id}
                                     </TableCell>
-                                    <TableCell >{row.firstName + row.lastName}</TableCell>
+                                    <TableCell >{row.firstName + ' ' + row.lastName}</TableCell>
                                     <TableCell >{row.address}</TableCell>
                                     <TableCell>
                                         <Button color='secondary'>
