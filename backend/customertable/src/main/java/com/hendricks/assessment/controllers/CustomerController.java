@@ -23,14 +23,14 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/create")
-	public @ResponseBody String createCustomer(@RequestParam String firstName, @RequestParam String lastName, 
+	public @ResponseBody CustomerEntity createCustomer(@RequestParam String firstName, @RequestParam String lastName, 
 			@RequestParam  String address) {
 		CustomerEntity c = new CustomerEntity();
 		c.setFirstName(firstName);
 		c.setLastName(lastName);
 		c.setAddress(address);
 		customerRepository.save(c);
-		return "Customer Added";
+		return c;
 		
 	}
 	
